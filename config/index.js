@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   projectName: 'zjyt_jt',
   date: '2020-9-16',
@@ -43,7 +45,7 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/',
+    publicPath: '/zjyt_jt',
     staticDirectory: 'static',
     postcss: {
       autoprefixer: {
@@ -58,6 +60,10 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    alias:{
+      '@/static': path.resolve(__dirname, '..', 'static'),
+      '@/pages': path.resolve(__dirname, '..', 'pages')
     }
   }
 }

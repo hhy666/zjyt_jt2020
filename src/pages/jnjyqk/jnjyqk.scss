@@ -1,0 +1,104 @@
+.circle_bg_kuang{
+    flex-direction: column;
+}
+
+.cbk_title{
+    width: calc(100% - 40Px);
+    height: 20Px;
+    margin: 10Px 20Px 0 20Px;
+    flex-direction: row;
+    flex: 1 1 100%;
+}
+
+.cbk_title_main{
+    flex: 1 1 50%;
+    font-size: 18Px;
+    color: #000;
+    font-weight: bold;
+    justify-content: flex-start;
+}
+
+.cbk_title_fu{
+    flex: 1 1 50%;
+    font-size: 16Px;
+    color: #ACACAC;
+    justify-content: flex-end;
+}
+
+.cbk_body{
+    width: calc(100% - 40PX);
+    height: auto;
+    margin: 0 20Px 15Px 20Px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.yy_view{
+    position: relative;
+    flex: 1 1 calc(33%);
+    height: 50Px;
+    margin-top: 10Px;
+    flex-direction: column;
+}
+
+.yyv_up{
+    width: 100%;
+    height: 30Px;
+    flex-direction: row;
+}
+
+.yyv_up_num{
+    justify-content: flex-end;
+    font-size: 25Px;
+    color: #577FF4;
+}
+
+.yyv_up_unit{
+    justify-content: flex-start;
+    color: #7E7E7E;
+    font-size: 13Px;
+    margin-top: 4Px;
+}
+
+.yyv_down{
+    width: 100%;
+    height: 20Px;
+    color: #000;
+    font-size: 15Px;
+    font-weight: bold;
+}
+
+.shuxian{
+    position: absolute;
+    width: 1Px;
+    height: 30%;
+    top:25%;
+    right: 5Px;
+    border: none;
+    background-color: #ccc;
+}
+
+.yyv_bottom_num{
+    color: red;
+}
+
+.yyv_bottom{
+    font-size: 15Px;
+}
+
+.yyvl_body_word{
+    color: #7E7E7E;
+    font-size: 15Px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.yyvl_body_word::after{
+    content: " : ";
+}
+
+.w100{
+    width: 100%;
+    justify-content: flex-start;
+    text-indent: 5Px;
+}

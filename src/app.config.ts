@@ -1,6 +1,8 @@
 export default {
   pages: [
-    'pages/index/index'
+    'pages/index/index',
+    'pages/jtgs/jtgs',
+    'pages/cpx/cpx'
   ],
   window: {
     backgroundTextStyle: 'light',
