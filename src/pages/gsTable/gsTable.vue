@@ -6,10 +6,10 @@
                 :class="{choosed:tabId == index}" 
                 @click="choosedThis(index)">{{item.text}}</a>
           </view>
-          <view class="table_exp" >
+          <!-- <view class="table_exp" >
               <text class="te_title" >{{title}}</text>
               <text class="te_unit" >{{unit}}</text>
-          </view>
+          </view> -->
           <view class="table_area" >
               <view class="table_head" >
                   <text class="table_th" 
@@ -25,7 +25,7 @@
                         <text class="table_td_text" v-if="tabId ==0 || tabId == 1"
                             :class="{iconNotExist:item.children.length == 0}" 
                             >{{item.name}}</text>
-                        <a class="table_td cbl" v-if="tabId ==2"
+                        <a class="table_td_text cbl" v-if="tabId ==2"
                             @click="gotoGsDetail(index, -1)" >{{item.name}}</a>   
                     </view>
                     <text class="table_td" v-if="index == 0" >{{item.name}}</text> 
@@ -78,7 +78,7 @@ export default {
 
     this.tabData.push({id: 0, text: "公司", operId:"findCompanyMsgByCompanyYh"});
     this.tabData.push({id: 1, text: "产品线", operId:"findCompanyMsgByCpx"});
-    this.tabData.push({id: 2, text: "区域公司", operId:"findCompanyMsgByArea"});
+    this.tabData.push({id: 2, text: "区域公司", operId:"findCompanyMsgByAreaYh"});
 
     this.theadData = [];
 
@@ -116,6 +116,9 @@ export default {
   mounted(){},
   methods: {
       choosedThis(i){
+        if(this.loading){
+            return false;
+        }  
         this.title = '按'+this.tabData[i].text+'统计';  
         this.tabId = i;
         this.initTableData(i);

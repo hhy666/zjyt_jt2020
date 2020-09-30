@@ -61,7 +61,7 @@ export default {
       this.ttuData.push({num:0, unit:"", word:"委托金额", bword:"今日", bnum:"+0"});
       this.ttuData.push({num:0, unit:"", word:"开工金额", bword:"今日", bnum:"+0"});
       this.ttuData.push({num:0, unit:"", word:"预测收入", bword:"今日", bnum:"+0"});
-      this.ttuData.push({num:0, unit:"", word:"业务收入", bword:"今日", bnum:"+0"});
+      this.ttuData.push({num:0, unit:"", word:"收入总额", bword:"今日", bnum:"+0"});
       this.ttuData.push({num:0, unit:"", word:"业务成本", bword:"今日", bnum:"+0"});
       this.ttuData.push({num:'0', unit:"", word:"毛利率", bword:"", bnum:""});
 

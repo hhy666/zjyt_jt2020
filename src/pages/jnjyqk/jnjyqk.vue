@@ -38,14 +38,15 @@ export default {
   },
   components: {},
   created(){
-      // this.yyData = [];
+      this.yyData = [];
 
-      // this.yyData.push({num:"12.45", unit:"亿", word:"营业收入"});
-      // this.yyData.push({num:"12.45", unit:"亿", word:"营业成本"});
-      // this.yyData.push({num:"12.45", unit:"亿", word:"营业利润"});
-      // this.yyData.push({num:"12.45", unit:"亿", word:"营业总额"});
-      // this.yyData.push({num:"12.45", unit:"亿", word:"净利润"});
-      // this.yyData.push({num:"", unit:"", word:""});
+      this.yyData.push({num: 0, unit:"", word:"营业收入"});
+      this.yyData.push({num: 0, unit:"", word:"营业成本"});
+      this.yyData.push({num: 0, unit:"", word:"营业利润"});
+      this.yyData.push({num: 0, unit:"", word:"营业总额"});
+      this.yyData.push({num: 0, unit:"", word:"净利润"});
+      this.yyData.push({num: 0, unit:"", word:""});
+
       this.initYyData();
   },
   mounted(){},
@@ -71,7 +72,7 @@ export default {
             data: {companyId: companyId}
         },response => {
           if(response.data.data.tdata == null || response.data.data.tdata.length == 0){
-            alert("系统异常！");
+            // alert("系统异常！");
             return false;
           }
 

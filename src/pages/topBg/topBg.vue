@@ -41,9 +41,9 @@ export default {
   methods: {
     setNowTime(){
       const _this = this;
-      setInterval(()=>{
-        _this.dataDate = "数据更新截止 " + new Date().toISOString().slice(0,10) + ' ' + new Date().toTimeString().slice(0,8);
-      },1000);
+      // setInterval(()=>{
+        _this.dataDate = "数据更新截止 " + new Date().toISOString().slice(0,10) + ' ' + new Date(new Date().getTime() - 30*60*1000).toTimeString().slice(0,8);
+      // },1000);
     } 
   }
 }

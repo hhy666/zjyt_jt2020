@@ -2,8 +2,9 @@
 import Taro from '@tarojs/taro'
 
 function requestData(reqData,callBack){
-    const basePath = 'http://47.94.241.212:8089/';
-    // const basePath = 'http://192.168.61.60:8089/';
+    // const basePath = 'http://47.94.241.212:8089/';
+    const basePath = 'http://192.168.61.60:8089/';
+    // const basePath = 'http://rpt-1.ccic.com:8089/';
     const dataParams = new Object();
         
     dataParams.params = new Object();
@@ -27,13 +28,14 @@ function requestData(reqData,callBack){
             console.log(response);
 
             if(response.data.status != 0){
-                alert('请求信息有误! '+response.data.error);
+                // alert('请求信息有误! '+response.data.error);
                 response.error = true;
             }    
 
             callBack(response);
         },
         response => {
+            window.console.log(reqData.operId + "出错response----"+response);
             callBack(response);
         }
     );        

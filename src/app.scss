@@ -154,6 +154,7 @@ block *{
     background-color: #5799EB;
     border-top-left-radius: 5Px;
     border-top-right-radius: 5Px;
+    margin-top: 10Px;
 }
 
 .table_area .table_body{
@@ -189,6 +190,10 @@ block *{
     background-color: #EAF4FF;
 }
 
+.table_area .table_tr_nc{
+    background-color: #fff !important;
+}
+
 .table_area .table_th{
     flex: 1 1 19%;
     height: 50Px;
@@ -206,6 +211,7 @@ block *{
     border-bottom: 1Px solid #ccc;
     text-align: center;
     white-space: inherit;
+    flex-direction: row;
 }
 
 .table_area .table_th:first-child,
@@ -232,6 +238,11 @@ block *{
     display: flex;
     width: 20Px;
     height: 20Px;
+    flex: 1 1 10%;
+}
+
+.table_area .table_td .table_td_text{
+    flex: 1 1 90%;
 }
 
 .icon_close::before{

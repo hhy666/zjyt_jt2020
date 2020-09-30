@@ -54,7 +54,7 @@ export default {
         zjdwtbData:Array,
         gngstbData:Array,
         jwgstbData:Array,
-        showZd:false
+        showZd:false        
     }
   },
   components: {
@@ -95,6 +95,11 @@ export default {
   methods: {
     showOrHideExplain(){
       this.isShowExplain = !this.isShowExplain;
+      if(this.isShowExplain){
+        document.body.style.overflow = 'hidden';
+      }else{
+        document.body.style.overflow = 'auto';
+      }
     },
     showZdBtn(){
       const _this = this;

@@ -81,13 +81,13 @@ export default {
             operId: 'findYwskByCpx'+id,
             data: {companyId: companyId}
         },response => {
-            if(response.data.data == null){
+            if(response.data.data == null || response.data.data.result == null){
                 // alert("系统错误!");
                 return false;
             }
 
             // _this.loading = false;
-
+            
             _this.$set(_this.ttuData, i, response.data.data.result);
         });
     }

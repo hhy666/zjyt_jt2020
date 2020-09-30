@@ -85,13 +85,12 @@ export default {
 
     this.ttdData.push({num:0, unit:"", word:"客户数量", bword:"今日", bnum:"+0",detail:[
     {word:"产品线活跃客户数量", num:0, unit:""},
-    {word:"非产品线活跃客户数量", num:0, unit:""},
-    {word:"非活跃客户数量", num:"", unit:""}
+    {word:"非产品线活跃客户数量", num:0, unit:""}
     ]});
     this.ttdData.push({num:0, unit:"", word:"供应商数量", bword:"今日", bnum:"+0",detail:[
     {word:"产品线活跃供应商数量", num:0, unit:""},
     {word:"非产品线活跃供应商数量", num:0, unit:""},
-    {word:"非活跃供应商数量", num:"", unit:""}
+    {word:"非活跃供应商数量", num:0, unit:""}
     ]});
     this.ttdData.push({num:0, unit:"", word:"出证数量", bword:"今日", bnum:"+0",detail:[
     {word:"证书数量", num:0, unit:""},
@@ -99,7 +98,9 @@ export default {
     ]});
     
     this.findYwskMsgSql1();
-    this.findYwskMsgSql2();
+    setTimeout(() => {
+        this.findYwskMsgSql2();  
+    }, 1);
     this.findYwskMsgSql3();
     this.findYwskMsgSql4();
     this.findYwskMsgSql5();
@@ -134,20 +135,28 @@ export default {
         });
     },
     findYwskMsgSql1Jt(){
-        this.findYwskMsgSql1JtQuery('Wtdl',0);
-        this.findYwskMsgSql1JtQuery('Kgdl',1);
-        this.findYwskMsgSql1JtQuery('Wgdl',2);
-        this.findYwskMsgSql1JtQuery('Wtje',3);
-        this.findYwskMsgSql1JtQuery('Ycsr',4);
+        setTimeout(() => {
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWtdlYear','num', this.ttuData[0]);            
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtKgdlYear','num', this.ttuData[1]);            
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWgdlYear','num', this.ttuData[2]);            
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWtjeYear','num', this.ttuData[3]);            
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtYcsrYear','num', this.ttuData[4]);            
+        }, 1);
+
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWtdlDay','bnum', this.ttuData[0]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtKgdlDay','bnum', this.ttuData[1]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWgdlDay','bnum', this.ttuData[2]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtWtjeDay','bnum', this.ttuData[3]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql1JtYcsrDay','bnum', this.ttuData[4]);
     },
-    findYwskMsgSql1JtQuery(id,i){
+    findYwskMsgSql1JtQueryAttr(id,attr,p){
         const _this = this;
         // 获取缓存的id
         const companyId = Taro.getStorageSync("showType"); 
 
         requestData({
             operServiceId: 'NewReportService',
-            operId: 'findYwskMsgSql1Jt'+id,
+            operId: id,
             data: {companyId: companyId}
         },response => {
             if(response.data.data == null || response.data.data.result == null){
@@ -155,7 +164,11 @@ export default {
                 return false;
             }
             
-            _this.$set(_this.ttuData, i, response.data.data.result);  
+            if(id == "findYwskMsgSql3JtKhslFhy"){
+                p.push(response.data.data.result);
+            }else{
+                _this.$set(p, attr, response.data.data.result);  
+            }
         });
     },
     findYwskMsgSql2(){
@@ -185,9 +198,14 @@ export default {
         // 获取类型
         const type = Taro.getStorageSync("showArea");
 
+        if(type == 0){
+            this.findYwskMsgSql3Jt();
+            return false;
+        }
+
         requestData({
             operServiceId: 'NewReportService',
-            operId: type == 1 ? 'findYwskMsgSql3' : ( type == 0 ? 'findYwskMsgSql3Jt' : 'findYwskMsgSql3Quyu'),
+            operId: type == 1 ? 'findYwskMsgSql3' : 'findYwskMsgSql3Quyu',
             data: {companyId: companyId}
         },response => {
             if(response.data.data == null || response.data.data.result == null){
@@ -197,6 +215,16 @@ export default {
             
             _this.$set(_this.ttdData, 0, response.data.data.result); 
         });
+    },
+    findYwskMsgSql3Jt(){
+        setTimeout(() => {
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql3JtKhslYear','num', this.ttdData[0]);            
+        }, 1);
+
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql3JtKhslDay','bnum', this.ttdData[0]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql3JtKhslCpxhy','num', this.ttdData[0].detail[0]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql3JtKhslFcpxhy','num', this.ttdData[0].detail[1]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql3JtKhslFhy',2, this.ttdData[0].detail);
     },
     findYwskMsgSql4(){
         const _this = this;
@@ -225,9 +253,14 @@ export default {
         // 获取类型
         const type = Taro.getStorageSync("showArea");
 
+        if(type == 0){
+            this.findYwskMsgSql5Jt();
+            return false;
+        }
+
         requestData({
             operServiceId: 'NewReportService',
-            operId: type == 1 ? 'findYwskMsgSql5' : ( type == 0 ? 'findYwskMsgSql5Jt' : 'findYwskMsgSql5Quyu'),
+            operId: type == 1 ? 'findYwskMsgSql5' : 'findYwskMsgSql5Quyu',
             data: {companyId: companyId}
         },response => {
             if(response.data.data == null || response.data.data.result == null){
@@ -237,6 +270,15 @@ export default {
             
             _this.$set(_this.ttdData, 2, response.data.data.result); 
         });
+    },
+    findYwskMsgSql5Jt(){
+        setTimeout(() => {
+            this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql5JtCzslYear','num', this.ttdData[2]);            
+        }, 1);
+        
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql5JtCzslDay','bnum', this.ttdData[2]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql5JtCzslZssl','num', this.ttdData[2].detail[0]);
+        this.findYwskMsgSql1JtQueryAttr('findYwskMsgSql5JtCzslQtcgw','num', this.ttdData[2].detail[1]);
     }
   }
 }

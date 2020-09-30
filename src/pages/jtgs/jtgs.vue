@@ -52,7 +52,8 @@ export default {
         dataDate:String,
         yytbData:Array,
         showZd:false,
-        showCompany:false
+        showCompany:false,
+        sil:Object
     }
   },
   components: {
@@ -65,7 +66,7 @@ export default {
     showCompany: showCompany,
     jtgsTable: jtgsTable
   },
-  created(){
+  created(){    
     // 置顶
     document.scrollingElement.scrollTop = 0;
       
@@ -89,6 +90,11 @@ export default {
     },
     showOrHideExplain(){
         this.isShowExplain = !this.isShowExplain;
+        if(this.isShowExplain){
+          document.body.style.overflow = 'hidden';
+        }else{
+          document.body.style.overflow = 'auto';
+        }
     },
     showZdBtn(){
         const _this = this;

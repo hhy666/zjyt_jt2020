@@ -16,6 +16,8 @@
         <cpxBnszqk :mt="10" :ht="300" />
         <!-- 重点服务技术中类收入 -->
         <cpxZdsr :mt="10" :ht="300" />
+        <!-- 重点服务对象中类收入 -->
+        <cpxZddx :mt="10" :ht="300" />
         <!-- 表格 -->
         <cpxTable :mt="10" />
     </view>
@@ -39,6 +41,7 @@ import cpxJnszsk from '../cpxJnszsk/cpxJnszsk'
 import cpxBnszqk from '../cpxBnszqk/cpxBnszqk'
 import cpxZdsr from '../cpxZdsr/cpxZdsr'
 import cpxTable from '../cpxTable/cpxTable'
+import cpxZddx from '../cpxZddx/cpxZddx'
 
 export default {
   name: 'cpx',
@@ -57,9 +60,10 @@ export default {
     cpxJnszsk: cpxJnszsk,
     cpxBnszqk: cpxBnszqk,
     cpxZdsr: cpxZdsr,
-    cpxTable: cpxTable
+    cpxTable: cpxTable,
+    cpxZddx: cpxZddx
   },
-  created(){
+  created(){    
     // 置顶
     document.scrollingElement.scrollTop = 0;
       
@@ -77,6 +81,11 @@ export default {
     },
     showOrHideExplain(){
         this.isShowExplain = !this.isShowExplain;
+        if(this.isShowExplain){
+          document.body.style.overflow = 'hidden';
+        }else{
+          document.body.style.overflow = 'auto';
+        }
     },
     showZdBtn(){
         const _this = this;

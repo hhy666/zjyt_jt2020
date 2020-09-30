@@ -13,7 +13,7 @@ import {$} from '@tarojs/extend'
 export default {
   data () {
     return {
-
+      
     }
   },
   components:{

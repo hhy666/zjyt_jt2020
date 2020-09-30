@@ -16,13 +16,13 @@
 .explain_kuang{
     display: flex;
     width: 98%;
-    height: 50%;
+    height: auto;
     flex-direction: row;
     flex-wrap: wrap;
     background-color: #fff;
     border-radius: 5Px;
     position: fixed;
-    top: 17%;
+    top: 5%;
     left: 1%;
     z-index: 11;
 }
@@ -36,6 +36,9 @@
     align-items: center;
     padding: 10Px 0 0 10Px;
     font-size: 20Px;
+    position: absolute;
+    top: 0;
+    left: 10Px;
 }
 
 .explain_close{
@@ -49,18 +52,41 @@
     border-radius: 35Px;
     color: red;
     margin: 15Px 0 0 7%;
+    position: absolute;
+    top: 0;
+    right: 15Px;
 }
 
 .explain_word{
     display: flex;
     width: calc(100% - 10Px);
     padding: 0 0 0 10Px;
-    height: 20Px;
+    height: 25Px;
+    line-height: 25Px;
     justify-content: flex-start;
     align-items: center;
-    font-size: 14Px;
+    font-size: 10Px;
+    white-space: nowrap;
 }
 
 .explain_word_title{
+    font-weight: bold;
     font-size: 15Px;
+}
+
+.explain_kuang_scroll{
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 50Px;
+}
+
+.explain_kuang_scroll_body{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 1200Px;
+    flex-direction: column;
+    justify-content: flex-start;
 }

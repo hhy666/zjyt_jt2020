@@ -6,10 +6,10 @@
                 :class="{choosed:tabId == index}" 
                 @click="choosedThis(index)">{{item.text}}</a>
           </view>
-          <view class="table_exp" >
+          <!-- <view class="table_exp" >
               <text class="te_title" >{{title}}</text>
               <text class="te_unit" >{{unit}}</text>
-          </view>
+          </view> -->
           <view class="table_kh_exp" v-if="tabId == 2" >
               <text class="tke_word" >取客户委托金额前100名</text>
               <view class="tke_btn" >
@@ -25,7 +25,8 @@
               </view>
               <text class="loading" v-if="loading" >数据加载中</text>
               <view class="table_body" >
-                  <view class="table_tr" v-for="(item, index) in tbodyData" :key="index" :class="{cbl: index == 0}" >
+                  <view class="table_tr" v-for="(item, index) in tbodyData" :key="index" :class="{cbl: index == 0,table_tr_nc:tabId == 2 && index == 1}" 
+                    v-if="(tabId == 2 && index > 0) || tabId == 1 || tabId == 0" >
                     <text class="table_td" v-if="tabId == 1" >{{item.name}}</text>
                     <text class="table_td" v-if="tabId == 2 || tabId == 0"
                         @touchstart="touchStart($event,item.name,index)" 
@@ -60,7 +61,7 @@ export default {
         tabData:Array,
         theadData:Array,
         tbodyData:Array,
-        khType:1,
+        khType:2,
         loading:true
     }
   },
@@ -105,6 +106,9 @@ export default {
   mounted(){},
   methods: {
       choosedThis(i){
+        if(this.loading){
+            return false;
+        }  
         this.tabId = i;
         this.initTableData(i);
       },

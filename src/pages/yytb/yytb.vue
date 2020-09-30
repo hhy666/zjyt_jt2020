@@ -8,7 +8,7 @@
           </view>
           <view class="chart" >
               <text class="chart_title" >{{chartTitle}}</text>
-              <view class="chart_body" :style="{height: ht+'Px'}" >
+              <view class="chart_body" :style="{height: (ht+50)+'Px'}" >
                   <chart :option="dbOption" />
               </view>
           </view>
@@ -42,7 +42,7 @@ export default {
   created(){
       this.tabId = 0;
       this.chartTitle = this.tabData[0].title;
-      this.initDbOption();
+      this.initDbOption();   
   },
   mounted(){},
   methods: {
@@ -91,11 +91,30 @@ export default {
                 color:['#0070C0','#F4B183','#FF0000'],
                 tooltip:{
                     triggrt:"x",
-                    position:[30,40]
+                    position:[30,40],
+                    formatter:function(params){
+                        let jnv = _this.dbOption.series[0].data[params.dataIndex];
+                        let qnv = _this.dbOption.series[1].data[params.dataIndex];
+                        let tbv = _this.dbOption.series[2].data[params.dataIndex];
+                        let str = params.name+"\n";
+                        str += _this.dbOption.series[0].name+" : "+(jnv > 100000000 ? 
+                                parseFloat(jnv/100000000).toFixed(2)+'亿' 
+                                : ( jnv > 10000 ? 
+                                    parseInt(jnv/10000)+'万' : jnv ))+" \n ";
+
+                        str += _this.dbOption.series[1].name+" : "+(qnv > 100000000 ? 
+                                parseFloat(qnv/100000000).toFixed(2)+'亿' 
+                                : ( qnv > 10000 ? 
+                                    parseInt(qnv/10000)+'万' : qnv ))+" \n";
+                        str +=  _this.dbOption.series[2].name+" : "+ tbv + "%";                                                                      
+                        
+                        return str;
+                    },
+                    extraCssText:'width:140px; white-space:pre-wrap; color:#fff;'
                 },
                 legend:[{
                     height:20,
-                    top:5,
+                    top:0,
                     itemWidth:20,
                     itemHeight:8,
                     data:legendData
@@ -103,7 +122,7 @@ export default {
                 grid:[{
                     left: 45,
                     right: 35,
-                    top: 30,
+                    top: 50,
                     bottom: 60,
                     height: '75%'
                 }],
@@ -190,6 +209,7 @@ export default {
                     yAxisIndex:1,
                     symbol: 'circle',
                     symbolSize: 8,
+                    label:{show:true,formatter:"{c}%"},
                     data: option.seriesData[2]
                 }]
             }

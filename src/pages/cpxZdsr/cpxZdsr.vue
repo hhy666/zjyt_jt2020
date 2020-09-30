@@ -39,7 +39,7 @@ export default {
     const _this = this;
 
     // 获取缓存的id
-    const companyId = "矿产品";    
+    const companyId = Taro.getStorageSync("showType");      
 
     requestData({
         operServiceId: 'NewReportService',

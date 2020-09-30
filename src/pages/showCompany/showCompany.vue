@@ -22,8 +22,8 @@
               </view>
           </view>
           <view class="scik_bottom" >
-              <a class="cancel_btn" @click="cancle()" >取消</a>
-              <a class="submit_btn" @click="submit()" >确定</a>
+              <!-- <a class="cancel_btn" @click="cancle()" >取消</a>
+              <a class="submit_btn" @click="submit()" >确定</a> -->
           </view>
       </view>
   </view>
@@ -78,6 +78,7 @@ export default {
       },
       chooseThis(index){
           this.choosedChildIndex = index;
+          this.submit();
       },
       cancle(){
           this.showChoosedCompany();

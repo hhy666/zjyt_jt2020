@@ -71,7 +71,16 @@ export default {
                 color:['#0070C0','#F4B183'],
                 tooltip:{
                     triggrt:"x",
-                    position:[30,40]
+                    position:[30,40],
+                    formatter:function(params){
+                        let str = params.seriesName+" : ",
+                            jnv = params.value;
+                        str += params.name+" "+(jnv > 100000000 ? 
+                                parseFloat(jnv/100000000).toFixed(2)+'亿' 
+                                : ( jnv > 10000 ? 
+                                    parseInt(jnv/10000)+'万' : jnv ))+" ";
+                        return str;
+                    }
                 },
                 legend:[{
                     height:20,
@@ -102,12 +111,12 @@ export default {
                     axisLine:{
                         show:false
                     },
-                    data:option.xAxisData
+                    data:option.xAxisData == undefined ? [] : option.xAxisData
                 }],
                 yAxis:[{
                     position:'left',
-                    min:option.yAxis[0].min,
-                    max:option.yAxis[0].max,
+                    min:option.yAxis == undefined ? 0 : option.yAxis[0].min,
+                    max:option.yAxis == undefined ? 0 : option.yAxis[0].max,
                     axisLabel: {
                         fontSize: 10,
                         formatter:function(value){
@@ -134,14 +143,14 @@ export default {
                     barGap: '10%',
                     symbol: 'rect',
                     symbolSize: 8,
-                    data: option.seriesData[0]
+                    data: option.seriesData == undefined ? [] : option.seriesData[0]
                 },{
                     name: legendData[1].name,
                     type: 'bar',
                     barGap: '10%',
                     symbol: 'rect',
                     symbolSize: 8,
-                    data: option.seriesData[1]
+                    data: option.seriesData == undefined ? [] : option.seriesData[1]
                 }]
             }
         });

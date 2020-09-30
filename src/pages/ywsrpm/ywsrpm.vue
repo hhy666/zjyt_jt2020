@@ -88,7 +88,13 @@ export default {
                 color:['#39CB73'],
                 tooltip:{
                     triggrt:"x",
-                    position:[30,40]
+                    position:[30,40],
+                    formatter:function(params){
+                        return params.name+" : "+(params.value > 100000000 ? 
+                                parseFloat(params.value/100000000).toFixed(2)+'亿' 
+                                : ( params.value > 10000 ? 
+                                    parseInt(params.value/10000)+'万' : params.value ));
+                    }
                 },
                 toolbox:{
                     iconStyle:{
@@ -221,7 +227,13 @@ export default {
                 color:['#1D8EFF'],
                 tooltip:{
                     triggrt:"x",
-                    position:[30,40]
+                    position:[30,40],
+                    formatter:function(params){
+                        return params.name+" : "+(params.value > 100000000 ? 
+                                parseFloat(params.value/100000000).toFixed(2)+'亿' 
+                                : ( params.value > 10000 ? 
+                                    parseInt(params.value/10000)+'万' : params.value ));
+                    }
                 },
                 toolbox:{
                     iconStyle:{
@@ -392,7 +404,13 @@ export default {
                 color:['#4DCDC1'],
                 tooltip:{
                     triggrt:"x",
-                    position:[30,40]
+                    position:[30,40],
+                    formatter:function(params){
+                        return params.name+" : "+(params.value > 100000000 ? 
+                                parseFloat(params.value/100000000).toFixed(2)+'亿' 
+                                : ( params.value > 10000 ? 
+                                    parseInt(params.value/10000)+'万' : params.value ));
+                    }
                 },
                 toolbox:{
                     iconStyle:{

@@ -51,6 +51,7 @@
     justify-content: flex-end;
     font-size: 25Px;
     color: #577FF4;
+    white-space: nowrap;
 }
 
 .yyv_up_unit{
@@ -83,7 +84,12 @@
 }
 
 .yyv_bottom{
-    font-size: 15Px;
+    font-size: 13Px;
+}
+
+.yyv_bottom .yyv_bottom_word,
+.yyv_bottom .yyv_bottom_num{
+    white-space: nowrap;
 }
 
 .yyvl_body_word{
