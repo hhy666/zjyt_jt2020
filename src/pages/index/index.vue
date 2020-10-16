@@ -26,6 +26,8 @@ export default {
     Taro.setStorageSync("showArea",0);
     // 类型名称
     Taro.setStorageSync("showTypeName", '中检一天');
+    // 清空khmc内容
+    Taro.setStorageSync("khmc","");
 
     // 置顶
     document.scrollingElement.scrollTop = 0;

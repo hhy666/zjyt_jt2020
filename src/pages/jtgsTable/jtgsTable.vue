@@ -29,6 +29,7 @@
                     v-if="(tabId == 2 && index > 0) || tabId == 1 || tabId == 0" >
                     <text class="table_td" v-if="tabId == 1" >{{item.name}}</text>
                     <text class="table_td" v-if="tabId == 2 || tabId == 0"
+                        :class="{cbl: index > 0}"
                         @touchstart="touchStart($event,item.name,index)" 
                         @touchend="touchEnd($event,item.name,index)" >
                         {{item.name.length > 6 ? item.name.substr(0,6) + '..' : item.name}}
@@ -194,6 +195,21 @@ export default {
       },
       touchEnd(e,name,idx){
         $("#over_name_"+idx).remove();
+        if(this.tabId == 2){
+            Taro.setStorageSync("khmc", this.tbodyData[idx].name);
+            Taro.setStorageSync("href", "../jtgs/jtgs");
+
+            Taro.reLaunch({
+                url:'../khmsg/khmsg?s='+Math.random()
+            });
+        }else if(this.tabId == 0){
+            Taro.setStorageSync("orgId", this.tbodyData[idx].orgId);
+            Taro.setStorageSync("href", "../jtgs/jtgs");
+
+            Taro.reLaunch({
+                url:'../khmsg/khmsg?s='+Math.random()
+            });
+        }
       }    
   }
 }

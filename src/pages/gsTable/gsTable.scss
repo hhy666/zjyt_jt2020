@@ -7,3 +7,16 @@
 .bbn{
     border-bottom: none !important;
 }
+
+.gs .table_td, 
+.gs .table_tr_children .table_td{
+    flex: 1 1 16%;
+    white-space: nowrap;
+}
+
+.gs .table_tr .zw,
+.gs .table_th:last-child, 
+.gs .table_td:last-child, 
+.gs .table_tr_children .table_td:last-child{
+    flex: 1 1 11%;
+}

@@ -10,7 +10,7 @@
               <text class="te_title" >{{title}}</text>
               <text class="te_unit" >{{unit}}</text>
           </view> -->
-          <view class="table_area" >
+          <view class="table_area" :class="{gs:tabId != 1}" >
               <view class="table_head" >
                   <text class="table_th" 
                     v-for="(item, index) in theadData" :key="index" 
@@ -22,26 +22,26 @@
                     <view class="table_td" v-if="index > 0" >
                         <a :class="{icon_close:!showedChildrenIndex[index], icon_open: showedChildrenIndex[index]}" 
                             v-if="item.children.length > 0" @click="showChildrenData(index)" ></a>
-                        <text class="table_td_text" v-if="tabId ==0 || tabId == 1"
-                            :class="{iconNotExist:item.children.length == 0}" 
-                            >{{item.name}}</text>
-                        <a class="table_td_text cbl" v-if="tabId ==2"
-                            @click="gotoGsDetail(index, -1)" >{{item.name}}</a>   
+                        <text class="table_td_text" :class="{iconNotExist:item.children.length == 0}" >{{item.name}}</text>
                     </view>
                     <text class="table_td" v-if="index == 0" >{{item.name}}</text> 
                     <text class="table_td" >{{item.wtdl}}</text>
                     <text class="table_td" >{{item.ycsr}}</text>
                     <text class="table_td" >{{item.srze}}</text>
                     <text class="table_td" >{{item.zcze}}</text>
+                    <a class="table_td cbl zw" v-if="tabId ==2 && index > 0" @click="gotoGsDetail(index, -1)" >详情</a>
+                    <text class="table_td zw" v-if="tabId == 0 || (tabId == 2 && index == 0)" ></text>
 
                     <view class="table_tr_children cbai" 
                     v-for="(im,idx) in item.children" :key="idx" 
                     v-if="showedChildrenIndex[index]" >
-                        <a class="table_td cbl" @click="gotoGsDetail(index,idx)" >{{im.name}}</a>
+                        <a class="table_td cbl" v-if="tabId != 1" @click="gotoGsHx(index,idx)" >{{im.name}}</a>
+                        <a class="table_td cbl" v-if="tabId == 1" @click="gotoGsDetail(index,idx)" >{{im.name}}</a>
                         <text class="table_td" >{{im.wtdl}}</text>
                         <text class="table_td" >{{im.ycsr}}</text>
                         <text class="table_td" >{{im.srze}}</text>
                         <text class="table_td" >{{im.zcze}}</text>
+                        <a class="table_td cbl" v-if="tabId != 1" @click="gotoGsDetail(index, idx)" >详情</a>
                     </view>
                   </view>                  
               </view>
@@ -54,6 +54,7 @@
 import './gsTable.scss'
 import Taro from '@tarojs/taro'
 import requestData from '../util/request'
+import { $ } from '@tarojs/extend'
 
 export default {
   name: 'gsTable',
@@ -87,7 +88,8 @@ export default {
     this.theadData.push("预测收入");
     this.theadData.push("收入总额");
     this.theadData.push("支出总额");
-
+    this.theadData.push("操作");   
+    
     const _this = this;
 
     // 获取缓存的id
@@ -119,12 +121,28 @@ export default {
         if(this.loading){
             return false;
         }  
+
+        // 添加移除 操作列
+        if(i == 1){
+            this.theadData.splice(this.theadData.length - 1, 1);
+        }else if($.inArray("操作", this.theadData) < 0){
+            this.theadData.push("操作");
+        }
+
         this.title = '按'+this.tabData[i].text+'统计';  
         this.tabId = i;
         this.initTableData(i);
       },
       showChildrenData(idx){
-          this.$set(this.showedChildrenIndex,idx,!this.showedChildrenIndex[idx]);
+        this.$set(this.showedChildrenIndex,idx,!this.showedChildrenIndex[idx]);
+      },
+      gotoGsHx(index, idx){
+        Taro.setStorageSync("orgId", this.tbodyData[index].children[idx].orgId);
+        Taro.setStorageSync("href", "../index/index");
+
+        Taro.reLaunch({
+            url:'../khmsg/khmsg?s='+Math.random()
+        });
       },
       gotoGsDetail(index, idx){
         let name = this.tbodyData[index].name;

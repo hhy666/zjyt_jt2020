@@ -72,6 +72,8 @@ export default {
       
     // 获取缓存的公司名称
     this.secondTitle = Taro.getStorageSync("showTypeName")+"一天";
+    // 清空khmc内容
+    Taro.setStorageSync("khmc","");
 
     this.showZdBtn();
 
