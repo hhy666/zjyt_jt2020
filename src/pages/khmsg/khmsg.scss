@@ -19,7 +19,7 @@
 .go_back{
     width: 25Px;
     height: 25Px;
-    background-color: blue;
+    background-color: #5F97E3;
     border-radius: 20Px;
     margin:0Px 5Px 0 15Px;
 }
@@ -64,7 +64,8 @@
 .khmsg_title{
     width: calc(100% - 15Px);
     padding: 5Px 0 5Px 15Px;    
-    background-image: linear-gradient(to bottom right, #5198D6, #ACD380);
+    background-image: linear-gradient(to bottom right, #5F97E3, #5F97E3);
+    // background-image: linear-gradient(to bottom right, #5198D6, #ACD380);
     color: #fff;
     font-size: 18Px;
     border-radius: 5Px;

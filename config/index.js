@@ -47,6 +47,9 @@ const config = {
   h5: {
     publicPath: '/zjyt_jt',
     staticDirectory: 'static',
+    router:{
+      basename: '/zjyt_jt'
+    },
     postcss: {
       autoprefixer: {
         enable: true,
