@@ -4,17 +4,10 @@
       class="circle_bg_kuang"
       :style="{marginTop: mt+'Px'}"
     >
-      <view class="selected_tab">
-        <a
-          class="stab"
-          v-for="(item, index) in tabData"
-          :key="index"
-          :class="{choosed:index == tabId}"
-          @click="choosedThis(index)"
-        >{{item.text}}</a>
+      <view class="cbk_title">
+        <text class="cbk_title_main">{{main}}</text>
       </view>
       <view class="chart">
-        <text class="chart_title">{{chartTitle}}</text>
         <view
           class="chart_body"
           :style="{height: (ht+50)+'Px'}"
@@ -27,22 +20,20 @@
 </template>
 
 <script>
-import "./yytb.scss";
+import "../yytb/yytb.scss";
 import Taro from "@tarojs/taro";
 import requestData from "../util/request";
 import chart from "../chart/chart";
 
 export default {
-  name: "yytb",
+  name: "jnywjyqst",
   data() {
     return {
-      chartTitle: String,
-      tabId: Number,
+      main: "2020年业务经营趋势图",
       dbOption: null,
     };
   },
   props: {
-    tabData: Array,
     mt: Number,
     ht: Number,
   },
@@ -50,17 +41,10 @@ export default {
     chart: chart,
   },
   created() {
-    this.tabId = 0;
-    this.chartTitle = this.tabData[0].title;
     this.initDbOption();
   },
   mounted() {},
   methods: {
-    choosedThis(i) {
-      this.tabId = i;
-      this.chartTitle = this.tabData[i].title;
-      this.initDbOption();
-    },
     initDbOption() {
       const _this = this;
 
@@ -68,15 +52,19 @@ export default {
       const companyId = Taro.getStorageSync("showType");
       // 获取type
       const type = Taro.getStorageSync("showArea");
-      let operId = this.tabData[this.tabId].operId;
+      // 请求的服务方法名
+      let operId;
 
-      if (type == 3) {
-        operId =
-          this.tabId == 0
-            ? "findYysrTbByQuyu"
-            : this.tabId == 1
-            ? "findYycbTbByQuyu"
-            : "findYylrTbByQuyu";
+      switch (parseInt(type)) {
+        case 0:
+          operId = "findYwjyqstZj";
+          break;
+        case 1:
+          operId = "findYwjyqstGs";
+          break;
+        case 3:
+          operId = "findYwjyqstQyGs";
+          break;
       }
 
       requestData(
@@ -99,53 +87,64 @@ export default {
 
           const legendData = [];
 
-          legendData.push({ name: "2020年收入", icon: "rect" });
-          legendData.push({ name: "2019年收入", icon: "rect" });
+          legendData.push({ name: "业务收入总额", icon: "rect" });
+          legendData.push({ name: "业务成本总额", icon: "rect" });
           legendData.push({
-            name: "同比",
+            name: "业务收入总额环比",
+            icon:
+              "path://M10,10 L19,10 L19,12 L10,12 M,20,11 a3,3 0 1,0 6,0 a3,3 0 1, 0 -6, 0 M27,10 L36,10 L36,12 L27,12Z",
+          });
+          legendData.push({
+            name: "业务成本总额环比",
             icon:
               "path://M10,10 L19,10 L19,12 L10,12 M,20,11 a3,3 0 1,0 6,0 a3,3 0 1, 0 -6, 0 M27,10 L36,10 L36,12 L27,12Z",
           });
 
           _this.dbOption = {
-            color: ["#FFA032", "#3377FF", "#58B5F7"],
+            color: ["#F07879", "#3377FF", "#F07879", "#3377FF"],
             tooltip: {
               triggrt: "x",
               position: [30, 40],
               formatter: function (params) {
-                let jnv = _this.dbOption.series[0].data[params.dataIndex];
-                let qnv = _this.dbOption.series[1].data[params.dataIndex];
-                let tbv = _this.dbOption.series[2].data[params.dataIndex];
+                let srze = _this.dbOption.series[0].data[params.dataIndex];
+                let cbze = _this.dbOption.series[1].data[params.dataIndex];
+                let srhb = _this.dbOption.series[2].data[params.dataIndex];
+                let cbhb = _this.dbOption.series[3].data[params.dataIndex];
                 let str = params.name + "\n";
                 str +=
                   _this.dbOption.series[0].name +
                   " : " +
-                  (jnv > 100000000
-                    ? parseFloat(jnv / 100000000).toFixed(2) + "亿"
-                    : jnv > 10000
-                    ? parseInt(jnv / 10000) + "万"
-                    : jnv) +
+                  (srze > 100000000
+                    ? parseFloat(srze / 100000000).toFixed(2) + "亿"
+                    : srze > 10000
+                    ? parseInt(srze / 10000) + "万"
+                    : srze) +
                   " \n ";
 
                 str +=
                   _this.dbOption.series[1].name +
                   " : " +
-                  (qnv > 100000000
-                    ? parseFloat(qnv / 100000000).toFixed(2) + "亿"
-                    : qnv > 10000
-                    ? parseInt(qnv / 10000) + "万"
-                    : qnv) +
+                  (cbze > 100000000
+                    ? parseFloat(cbze / 100000000).toFixed(2) + "亿"
+                    : cbze > 10000
+                    ? parseInt(cbze / 10000) + "万"
+                    : cbze) +
                   " \n";
-                str += _this.dbOption.series[2].name + " : " + tbv + "%";
+
+                str +=
+                  _this.dbOption.series[2].name + " : " + srhb + "%" + " \n";
+
+                str += _this.dbOption.series[2].name + " : " + cbhb + "%";
 
                 return str;
               },
-              extraCssText: "width:140px; white-space:pre-wrap; color:#fff;",
+              extraCssText: "width:190px; white-space:pre-wrap; color:#fff;",
             },
             legend: [
               {
                 height: 20,
                 top: 0,
+                width: "80%",
                 itemWidth: 20,
                 itemHeight: 8,
                 data: legendData,
@@ -154,9 +153,9 @@ export default {
             grid: [
               {
                 left: 45,
-                right: 35,
-                top: 50,
-                bottom: 60,
+                right: 45,
+                top: 70,
+                bottom: 100,
                 height: "75%",
               },
             ],
@@ -245,7 +244,7 @@ export default {
                 barGap: "10%",
                 symbol: "rect",
                 symbolSize: 8,
-                data: option.seriesData[1],
+                data: option.seriesData[2],
               },
               {
                 name: legendData[2].name,
@@ -254,7 +253,16 @@ export default {
                 symbol: "circle",
                 symbolSize: 8,
                 label: { show: true, formatter: "{c}%" },
-                data: option.seriesData[2],
+                data: option.seriesData[1],
+              },
+              {
+                name: legendData[3].name,
+                type: "line",
+                yAxisIndex: 1,
+                symbol: "circle",
+                symbolSize: 8,
+                label: { show: true, formatter: "{c}%" },
+                data: option.seriesData[3],
               },
             ],
           };

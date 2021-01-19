@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 
 function requestData(reqData, callBack) {
     // const basePath = 'http://47.94.241.212:8089/';
-    // const basePath = 'http://192.168.63.209:8080/api/';
+    // const basePath = 'http://192.168.57.227:8089/';
     const basePath = 'http://rpt-1.ccic.com:8089/';
     const dataParams = new Object();
 

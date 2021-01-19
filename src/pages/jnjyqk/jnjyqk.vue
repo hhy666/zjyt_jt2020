@@ -41,7 +41,7 @@ export default {
   name: "jnjyqk",
   data() {
     return {
-      main: "今年经营情况",
+      main: "2020年经营情况",
       fu: "数据来自NC系统利润表",
       yyData: Array,
     };
@@ -81,7 +81,7 @@ export default {
 
       requestData(
         {
-          operServiceId: "NewReportService",
+          operServiceId: "NewReport2020Service",
           operId: operId,
           data: { companyId: companyId },
         },

@@ -17,11 +17,10 @@
 .second_title{
     display: flex;
     width: auto;
-    height: 40Px;
+    height: 48Px;
     justify-content: flex-start;
     align-items: center;
-    font-size: 22Px;
-    font-weight: bold;
+    font-size: 21Px;
     padding: 0 0 0 6.5%;
     margin-top: 15Px;
     white-space: nowrap;
@@ -38,6 +37,19 @@
     white-space: nowrap;
 }
 
+.data_date .sjsmIcon{
+    display: inline-block !important;
+    width: 14Px;
+    height: 14Px;
+    line-height: 14Px;
+    text-align: center;
+    border: 1Px solid #ccc;
+    border-radius: 14Px;
+    background-color: #4B81FE;
+    color: #fff;
+    margin-left: 5Px;
+}
+
 .ptn_right{
     width: 40%;
     height: 100%;
@@ -47,14 +59,15 @@
 }
 
 .ptn_right_1{
-    width: 55%;
-    height: 25Px;
+    width: 70%;
+    height: 32Px;
     flex-direction: row;
     background-color: #fff;
     border-top-left-radius: 25Px;
     border-bottom-left-radius: 25Px;
-    color: red;
-    margin: 30Px 0 0 30%;
+    color: #4384FE;
+    margin: 75Px 0 0 30%;
+    font-weight: bold;
 }
 
 .ptn_right_1 .ptn_right_left{
@@ -73,7 +86,30 @@
 }
 
 .ptn_right_1 .data_explain{
-    width: 70%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    font-size: 14Px;
+}
+
+.ptn_right_1 .data_explain .arrow{
+    display: inline-block !important;
+    width: 20Px;
+    height: 20Px;
+    border-radius: 20Px;
+    background-color: #4384FE;
+    color: #fff;
+    margin-left: 5Px;
+}
+
+.ptn_right_1 .data_explain .arrow::after{
+    content: ">";
+    width: 22Px;
+    height: 20Px;
+    text-align: center;
+    display: block;
+    position: relative;
+    color: #fff;
+    font-size: 20Px;
+    line-height: 17Px;
 }

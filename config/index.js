@@ -45,10 +45,10 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/zjyt_jt',
+    publicPath: '/zjyt_jt_2020_year',
     staticDirectory: 'static',
-    router:{
-      basename: '/zjyt_jt'
+    router: {
+      basename: '/zjyt_jt_2020_year'
     },
     postcss: {
       autoprefixer: {
@@ -64,7 +64,7 @@ const config = {
         }
       }
     },
-    alias:{
+    alias: {
       '@/static': path.resolve(__dirname, '..', 'static'),
       '@/pages': path.resolve(__dirname, '..', 'pages')
     }
