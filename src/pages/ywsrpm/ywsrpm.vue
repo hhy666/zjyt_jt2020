@@ -41,6 +41,8 @@ export default {
       tabId: 0,
       srpmOption: null,
       isShuBan: true,
+      gngsOption: Object,
+      jwgsOption: Object,
     };
   },
   props: {
@@ -126,7 +128,8 @@ export default {
           feature: {
             myTool1: {
               show: true,
-              title: "横版/竖版切换",
+              // title: "横版/竖版切换",
+              title: "全部排名",
               icon: "path://M10,50 H90 V90 H10 Z M50,10 H90 V90 H50 Z",
               onclick: function () {
                 const xxx = this;
@@ -267,6 +270,10 @@ export default {
     },
     returnGngstb0Option(option) {
       const _this = this;
+
+      // 记录 xdata
+      _this.gngsOption = option;
+
       return {
         color: ["#62CAEF"],
         tooltip: {
@@ -292,7 +299,8 @@ export default {
           feature: {
             myTool2: {
               show: true,
-              title: "横版/竖版切换",
+              // title: "横版/竖版切换",
+              title: "全部排名",
               icon: "path://M10,50 H90 V90 H10 Z M50,10 H90 V90 H50 Z",
               onclick: function () {
                 const xxx = this;
@@ -332,9 +340,17 @@ export default {
                   };
                   let xxx = [],
                     yyy = [];
-                  for (let i = op.xAxis[0].data.length - 1; i >= 0; i--) {
-                    xxx.push(op.xAxis[0].data[i]);
-                    yyy.push(op.series[0].data[i]);
+
+                  for (
+                    let i = 0;
+                    i <
+                    (_this.gngsOption.xAxisData.length > 10
+                      ? 10
+                      : _this.gngsOption.xAxisData.length);
+                    i++
+                  ) {
+                    xxx.push(_this.gngsOption.xAxisData[i]);
+                    yyy.push(_this.gngsOption.seriesData[0][i]);
                   }
                   op.xAxis[0].data = xxx;
                   op.series[0].data = yyy;
@@ -371,9 +387,13 @@ export default {
                   op.grid[0].right = 20;
                   let xxx = [],
                     yyy = [];
-                  for (let i = op.yAxis[0].data.length - 1; i >= 0; i--) {
-                    xxx.push(op.yAxis[0].data[i]);
-                    yyy.push(op.series[0].data[i]);
+                  for (
+                    let i = _this.gngsOption.xAxisData.length - 1;
+                    i >= 0;
+                    i--
+                  ) {
+                    xxx.push(_this.gngsOption.xAxisData[i]);
+                    yyy.push(_this.gngsOption.seriesData[0][i]);
                   }
                   op.yAxis[0].data = xxx;
                   op.series[0].data = yyy;
@@ -428,7 +448,10 @@ export default {
             axisLine: {
               show: false,
             },
-            data: option.xAxisData,
+            data: option.xAxisData.slice(
+              option.xAxisData.length - 10,
+              option.xAxisData.length
+            ),
           },
         ],
         yAxis: [
@@ -473,6 +496,9 @@ export default {
     },
     returnJwgstb0Option(option) {
       const _this = this;
+
+      _this.jwgsOption = option;
+
       return {
         color: ["#62CAEF"],
         tooltip: {
@@ -498,7 +524,8 @@ export default {
           feature: {
             myTool2: {
               show: true,
-              title: "横版/竖版切换",
+              // title: "横版/竖版切换",
+              title: "全部排名",
               icon: "path://M10,50 H90 V90 H10 Z M50,10 H90 V90 H50 Z",
               onclick: function () {
                 const xxx = this;
@@ -538,10 +565,19 @@ export default {
                   };
                   let xxx = [],
                     yyy = [];
-                  for (let i = op.xAxis[0].data.length - 1; i >= 0; i--) {
-                    xxx.push(op.xAxis[0].data[i]);
-                    yyy.push(op.series[0].data[i]);
+
+                  for (
+                    let i = 0;
+                    i <
+                    (_this.jwgsOption.xAxisData.length > 10
+                      ? 10
+                      : _this.jwgsOption.xAxisData.length);
+                    i++
+                  ) {
+                    xxx.push(_this.jwgsOption.xAxisData[i]);
+                    yyy.push(_this.jwgsOption.seriesData[0][i]);
                   }
+
                   op.xAxis[0].data = xxx;
                   op.series[0].data = yyy;
                   chart.setOption(op);
@@ -580,9 +616,13 @@ export default {
                   op.grid[0].right = 20;
                   let xxx = [],
                     yyy = [];
-                  for (let i = op.yAxis[0].data.length - 1; i >= 0; i--) {
-                    xxx.push(op.yAxis[0].data[i]);
-                    yyy.push(op.series[0].data[i]);
+                  for (
+                    let i = _this.jwgsOption.xAxisData.length - 1;
+                    i >= 0;
+                    i--
+                  ) {
+                    xxx.push(_this.jwgsOption.xAxisData[i]);
+                    yyy.push(_this.jwgsOption.seriesData[0][i]);
                   }
                   op.yAxis[0].data = xxx;
                   op.series[0].data = yyy;
@@ -637,7 +677,10 @@ export default {
             axisLine: {
               show: false,
             },
-            data: option.xAxisData,
+            data: option.xAxisData.slice(
+              option.xAxisData.length - 10,
+              option.xAxisData.length
+            ),
           },
         ],
         yAxis: [

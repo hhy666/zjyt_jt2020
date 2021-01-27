@@ -55,7 +55,7 @@
                     <text class="yyv_bottom_num" >{{ywcb.left.bnum}}</text>
                 </view> -->
         </view>
-        <view class="fx33 fdc">
+        <view class="fx60 fdc">
           <view
             class="fx100 jcfs"
             v-for="(im, idx) in ywcb.mid"
@@ -188,9 +188,19 @@ export default {
             return false;
           }
 
-          _this.$set(parent, sx, response.data.data.result);
+          _this.setUnit(parent, sx, "unit", response.data.data.result);
         }
       );
+    },
+    // 设置 单位 亿/万
+    // result 后台传来的数据 unit 要更新的属性string p 要更新的对象
+    setUnit(p, attr, unit, result) {
+      if (result.indexOf("亿") > -1 || result.indexOf("万") > -1) {
+        this.$set(p, attr, result.substring(0, result.length - 1));
+        this.$set(p, unit, result.substring(result.length - 1, result.length));
+      } else {
+        this.$set(p, attr, result);
+      }
     },
   },
 };

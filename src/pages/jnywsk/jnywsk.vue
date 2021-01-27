@@ -295,7 +295,7 @@ export default {
           if (id == "findYwskMsgSql3JtKhslFhy") {
             p.push(response.data.data.result);
           } else {
-            _this.$set(p, attr, response.data.data.result);
+            _this.setUnit(p, attr, "unit", response.data.data.result);
           }
         }
       );
@@ -324,7 +324,9 @@ export default {
             return false;
           }
 
-          _this.$set(_this.ttuData, 5, response.data.data.result);
+          const r = response.data.data.result;
+          r.num = r.num.indexOf("null")>-1 ? '0%' : r.num;
+          _this.$set(_this.ttuData, 5, r);
         }
       );
     },
@@ -467,6 +469,16 @@ export default {
         this.ttdData[2].detail[1]
       );
     },
+    // 设置 单位 亿/万 
+    // result 后台传来的数据 unit 要更新的属性string p 要更新的对象
+    setUnit(p,attr,unit,result){
+      if(result.indexOf("亿") > -1 || result.indexOf("万") > -1){
+        this.$set(p, attr, result.substring(0, result.length - 1));
+        this.$set(p, unit, result.substring(result.length - 1, result.length));
+      }else{
+        this.$set(p, attr, result);
+      }
+    }
   },
 };
 </script>

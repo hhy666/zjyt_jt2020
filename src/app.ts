@@ -3,7 +3,7 @@ import './app.scss'
 // import '../src/pages/util/loading'
 
 // 跳转到2021的连接
-// export const goto2021Url = "http://192.168.130.70:8081/";
+// export const goto2021Url = "http://192.168.61.60:10087/";
 export const goto2021Url = "http://rpt-1.ccic.com:8080/";
 
 const App = new Vue({

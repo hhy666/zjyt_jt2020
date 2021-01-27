@@ -4,7 +4,7 @@
       <view class="ptn_left">
         <text class="second_title">{{secondTitle}}</text>
         <text class="data_date">
-          <text>{{dataDate}}</text>
+          <text style="white-space:nowrap;" >{{dataDate}}</text>
           <a class="sjsmIcon" @click="showOrHideExplain()">?</a>
         </text>
       </view>

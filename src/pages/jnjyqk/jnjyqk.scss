@@ -23,12 +23,14 @@
     font-size: 16Px;
     color: #ACACAC;
     justify-content: flex-end;
+    white-space: nowrap;
 }
 
 .cbk_body{
-    width: calc(100% - 40PX);
+    // width: calc(100% - 40PX);
+    width: calc(100%);
     height: auto;
-    margin: 0 20Px 15Px 20Px;
+    // margin: 0 20Px 15Px 20Px;
     flex-direction: row;
     flex-wrap: wrap;
 }

@@ -99,8 +99,8 @@ export default {
 
           const legendData = [];
 
-          legendData.push({ name: "2020年收入", icon: "rect" });
-          legendData.push({ name: "2019年收入", icon: "rect" });
+          legendData.push({ name: "2020年", icon: "rect" });
+          legendData.push({ name: "2019年", icon: "rect" });
           legendData.push({
             name: "同比",
             icon:
@@ -253,7 +253,8 @@ export default {
                 yAxisIndex: 1,
                 symbol: "circle",
                 symbolSize: 8,
-                label: { show: true, formatter: "{c}%" },
+                smooth:true,
+                label: { show: false, formatter: "{c}%" },
                 data: option.seriesData[2],
               },
             ],
